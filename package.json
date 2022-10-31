@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "nyc riteway test/**/*-rt.js | tap-nirvana"
+    "test": "riteway -r @babel/register './src/**/*.unit.test.js '| tap-nirvana",
+    "watch": "watch 'clear && npm run -s test' | tap-nirvana"
   },
   "dependencies": {
     "next": "13.0.0",
@@ -15,10 +16,15 @@
     "react-dom": "18.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.19.6",
+    "@babel/preset-env": "^7.19.4",
+    "@babel/register": "^7.18.9",
+    "@babel/runtime-corejs2": "^7.20.0",
     "eslint": "8.26.0",
     "eslint-config-next": "13.0.0",
-    "riteway": "^7.0.0",
     "nyc": "^15.1.0",
-    "tap-nirvana": "^1.1.0"
+    "riteway": "^7.0.0",
+    "tap-nirvana": "^1.1.0",
+    "watch": "^1.0.2"
   }
 }

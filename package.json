@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "nyc riteway test/**/*-rt.js | tap-nirvana"
   },
   "dependencies": {
     "next": "13.0.0",
@@ -15,6 +16,9 @@
   },
   "devDependencies": {
     "eslint": "8.26.0",
-    "eslint-config-next": "13.0.0"
+    "eslint-config-next": "13.0.0",
+    "riteway": "^7.0.0",
+    "nyc": "^15.1.0",
+    "tap-nirvana": "^1.1.0"
   }
 }

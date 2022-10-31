@@ -1,4 +1,6 @@
-# rejection-q
+#rejection-app
+
+A portfolio project for professional developers to highlight skills with modern tech stacks like React, Redux, Serverless, etc. EricElliottJS.com.
 
 Want to work as a team?
 

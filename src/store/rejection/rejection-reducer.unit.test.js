@@ -4,6 +4,7 @@ import {
   reducer,
   addQuestion,
   updateQuestion,
+  removeQuestion,
   selectScore,
   selectQuestions,
   slice,
@@ -12,7 +13,7 @@ import {
 const createState = () => ({});
 const withSlice = (state) => ({ [slice]: state });
 
-describe("rejection-reducer", async (assert) => {
+describe(`${slice}/reducer`, async (assert) => {
   assert({
     given: "no arguments",
     should: "return a valid initial state",
@@ -111,5 +112,47 @@ describe(`${slice}/updateQuestion`, async (assert) => {
     // actual: selectQuestions(state).find(({ id }) => id === questionId), //because filter was returning an array
     actual: selectedQuestion,
     expected: { ...questions[1], status: "Rejected" },
+  });
+});
+
+//verify with Eric
+describe(`${slice}/removeQuestion`, async (assert) => {
+  const questions = [
+    {
+      id: cuid(),
+      askee: "boss",
+      question: "May I have a raise?",
+      status: "Rejected",
+    },
+    {
+      id: cuid(),
+      askee: "boss",
+      question: "May I have an extra scoop of ice-cream?",
+      status: "Accepted",
+    },
+    {
+      id: cuid(),
+      askee: "boss",
+      question: "Let's make some software!",
+      status: "Unanswered",
+    },
+  ];
+
+  const question = {
+    id: questions[0].id,
+  };
+
+  const actions = questions.map(addQuestion); // a deeper undestanding
+  const initialState = actions.reduce(reducer, reducer()); // a deeper understnading
+
+  ///
+  const state = withSlice(reducer(initialState, removeQuestion(question))); //it's correct to have this initialization for my expected state
+  const expected = [questions[1], questions[2]];
+
+  assert({
+    given: "a question id ",
+    should: "remove the question from state",
+    actual: selectQuestions(state),
+    expected, //expected: state -- explain if it is correct to initialize the expected state -- how and when to
   });
 });

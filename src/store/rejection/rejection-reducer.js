@@ -17,12 +17,22 @@ export const updateQuestion = ({ id, status } = {}) => ({
   payload: { id, status },
 });
 
+export const removeQuestion = ({ id } = {}) => ({
+  type: `${slice}/removeQuestion`,
+  payload: { id },
+});
+
 export const reducer = (state = {}, { type, payload } = {}) => {
   switch (type) {
     case addQuestion().type:
       return { ...state, [payload.id]: payload };
     case updateQuestion().type: {
       state[payload.id] = { ...state[payload.id], status: payload.status };
+      return state;
+    }
+    case removeQuestion().type: {
+      delete state[payload.id];
+      return state;
     }
 
     default:
